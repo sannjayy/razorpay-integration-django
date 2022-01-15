@@ -9,13 +9,13 @@ from django.views.decorators.csrf import csrf_exempt
 
 def home(request):
     '''API KEYS'''
-    key_id = 'PLACE YOUR PUBLIC KEY HERE'
-    secret_key = 'PLACE YOUR SECRET KEY HERE'
-
     if request.method == 'POST':
         name = request.POST.get('name')
         product_amount = request.POST.get('amount')
         amount = int(product_amount) * 100 # 
+        key_id = 'PLACE YOUR PUBLIC KEY HERE'
+        secret_key = 'PLACE YOUR SECRET KEY HERE'
+
         # API INTEGRATION
         client = razorpay.Client(auth=(key_id, secret_key))
         payment_info = client.order.create({'amount': amount, 'currency':'INR', 'payment_capture': '1'})
